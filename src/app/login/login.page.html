@@ -1,0 +1,51 @@
+<ion-content>
+  <div class="flex flex-center">
+    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <ion-item lines="full">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input id="userName" formControlName='userName' type="text" required></ion-input>
+      
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Password</ion-label>
+        <ion-input id="password" formControlName='password' type="password" required></ion-input>
+      </ion-item>
+
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="primary" expand="block">Sign In</ion-button>
+        </ion-col>
+      </ion-row>
+
+         <!-- the validation -->
+      <ion-row>
+        <ion-col>
+          <ion-item *ngIf="userName.invalid && isSubmited" color='danger'>
+            <ion-label *ngIf="userName.errors.required" >
+              Username is required.
+            </ion-label>
+            <ion-label *ngIf="userName.errors.minlength">
+              Username must be at least 2 characters long.
+            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="password.invalid && isSubmited" color='danger'>
+            <ion-label *ngIf="password.errors.required">
+              Password is required.
+            </ion-label>
+            <ion-label *ngIf="password.errors.minlength" >
+              Password must be at least 2 characters long.
+            </ion-label>
+          </ion-item>
+
+          <ion-item *ngIf="loginFailed" color='danger'>
+            <ion-label>
+              {{loginErrorMessage}}
+            </ion-label>
+          </ion-item>
+
+        </ion-col>
+      </ion-row>
+    </form>
+  </div>
+</ion-content>
